@@ -1,7 +1,7 @@
 package org.example
 
 object Repository {
-    fun create(content:String,author:String) {
-        EntityManager.insert(Entity(content,author))
+    fun create(content:String,author:String): Entity? {
+        return EntityManager.insert(content,author)
     }
 }

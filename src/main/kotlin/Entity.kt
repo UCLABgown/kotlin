@@ -1,4 +1,3 @@
 package org.example
 
-class Entity (content:String,author:String){
-}
+data class Entity(var id: Int, var content: String, var author: String)

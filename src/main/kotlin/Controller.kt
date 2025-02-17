@@ -43,7 +43,10 @@ class Controller {
         val content: String = sc.nextLine()
         print("작가: ")
         val author: String = sc.nextLine()
-        Service.craete(content, author)
+        val entity = Service.craete(content, author)
+        if (entity != null) {
+            println("${entity.id} 번 명언이 등록되었습니다.")
+        }
 
     }
 }
