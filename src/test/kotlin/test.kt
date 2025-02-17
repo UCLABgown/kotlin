@@ -80,6 +80,18 @@ class test {
         assert(str.contains("몰라2"))
 
     }
+    @Test
+    fun t6(){
+
+        val input = """
+            삭제?id=1
+            종료
+                """.trimIndent()
+        val str: String = TestUtil.run(input)
+        println(str)
+        assert(str.contains("1번 명언 삭제"))
+
+    }
 
 
 }

@@ -28,9 +28,17 @@ class Controller {
     private fun repeat(){
         while (isThreadRun) {
             val input = input()
+            val id = util.split(input)
             Controller::class.members.find {
-                it.annotations.any { anno -> anno is handler && anno.value == input }
-            }?.call(this)
+                it.annotations.any { anno -> anno is handler && input.contains( anno.value) }
+            }?.let{ m ->
+                if(m.parameters.size == 1)
+                    m.call(this)
+                if(m.parameters.size == 2) {
+                    m.call(this, id)
+                }
+
+            }
         }
     }
     @handler("종료")
@@ -54,6 +62,11 @@ class Controller {
             key,value ->
             println("${value.id} / ${value.author} / ${value.content}")
         }
+    }
+    @handler("삭제")
+    fun delete(id:Int){
+        val id = Service.delete(id)
+        println("${id}번 명언 삭제")
     }
 }
 

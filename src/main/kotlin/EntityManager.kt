@@ -9,4 +9,11 @@ object EntityManager {
         number++
         return entity
     }
+    fun delete(id:Int): Int{
+        if(mutableMap.contains(id)){
+            mutableMap.remove(id)
+            return id;
+        }
+        return -1;
+    }
 }
