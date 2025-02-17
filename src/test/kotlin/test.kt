@@ -93,5 +93,18 @@ class test {
 
     }
 
+    @Test
+    fun t7(){
+
+        val input = """
+            삭제?id=1123
+            종료
+                """.trimIndent()
+        val str: String = TestUtil.run(input)
+        println(str)
+        assert(str.contains("1123번 명언은 존재하지 않습니다."))
+
+    }
+
 
 }

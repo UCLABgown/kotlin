@@ -65,8 +65,11 @@ class Controller {
     }
     @handler("삭제")
     fun delete(id:Int){
-        val id = Service.delete(id)
-        println("${id}번 명언 삭제")
+        val id_ = Service.delete(id)
+        if(id_ == -1)
+            println("${id}번 명언은 존재하지 않습니다.")
+        else
+            println("${id}번 명언 삭제")
     }
 }
 
