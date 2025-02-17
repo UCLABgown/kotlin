@@ -1,4 +1,4 @@
-package org.example
+package org.example.test
 
 import java.util.*
 
@@ -58,7 +58,7 @@ class Controller {
     }
     @handler("목록")
     fun list(){
-        EntityManager.mutableMap.forEach{
+        Service.gets().forEach{
             key,value ->
             println("${value.id} / ${value.author} / ${value.content}")
         }
@@ -71,5 +71,21 @@ class Controller {
         else
             println("${id}번 명언 삭제")
     }
+    @handler("수정")
+    fun modify(id:Int){
+        val entity = Service.get(id)
+        if (entity == null)
+            println("${id}번 명언은 존재하지 않습니다.")
+        else{
+            print("명언(기존) : ${entity.content}")
+            print("명언: ")
+            val content: String = sc.nextLine()
+            print("작가(기존) : ${entity.author}")
+            print("작가: ")
+            val author: String = sc.nextLine()
+            Service.modify(id, content, author)
+        }
+    }
+
 }
 

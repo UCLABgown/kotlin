@@ -1,4 +1,6 @@
-import org.example.Controller
+package test
+
+import org.example.test.Controller
 import java.io.*
 import java.util.*
 

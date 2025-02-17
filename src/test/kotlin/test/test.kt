@@ -1,3 +1,6 @@
+package test
+
+import org.example.test.Service
 import kotlin.test.Test
 
 class test {
@@ -25,7 +28,7 @@ class test {
         assert(str.contains("등록"))
         assert(str.contains("작가"))
         assert(str.contains("명언"))
-        println(1)
+
 
     }
     @Test
@@ -88,7 +91,6 @@ class test {
             종료
                 """.trimIndent()
         val str: String = TestUtil.run(input)
-        println(str)
         assert(str.contains("1번 명언 삭제"))
 
     }
@@ -101,8 +103,25 @@ class test {
             종료
                 """.trimIndent()
         val str: String = TestUtil.run(input)
-        println(str)
         assert(str.contains("1123번 명언은 존재하지 않습니다."))
+
+    }
+    @Test
+    fun t8(){
+
+        val input = """
+            수정?id=2
+            바뀐명언
+            바뀐이름
+            종료
+                """.trimIndent()
+        val str: String = TestUtil.run(input)
+        println(str)
+        val entity = org.example.test.Service.get(2)
+        print(entity!!.content)
+        assert(entity!!.content.equals("바뀐명언"))
+
+
 
     }
 
