@@ -45,7 +45,7 @@ class Controller {
         val author: String = sc.nextLine()
         val entity = Service.craete(content, author)
         if (entity != null) {
-            println("${entity.id} 번 명언이 등록되었습니다.")
+            println("${entity.id}번 명언이 등록되었습니다.")
         }
 
     }
