@@ -37,5 +37,14 @@ class Controller {
     fun exit(){
         isThreadRun = false
     }
+    @handler("등록")
+    fun insert(){
+        print("명언: ")
+        val content: String = sc.nextLine()
+        print("작가: ")
+        val author: String = sc.nextLine()
+        Service.craete(content, author)
+
+    }
 }
 
