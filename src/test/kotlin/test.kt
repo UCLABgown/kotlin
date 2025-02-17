@@ -50,7 +50,7 @@ class test {
 
         val input = """
             등록
-            몰라
+            몰라1
             사람임1
             등록
             몰라2
@@ -64,6 +64,20 @@ class test {
         assert(str.contains("명언"))
         assert(str.contains("2번 명언이 등록되었습니다"))
         assert(str.contains("3번 명언이 등록되었습니다"))
+
+    }
+    @Test
+    fun t5(){
+
+        val input = """
+            목록
+            종료
+                """.trimIndent()
+        val str: String = TestUtil.run(input)
+        assert(str.contains("사람임1"))
+        assert(str.contains("몰라1"))
+        assert(str.contains("사람임2"))
+        assert(str.contains("몰라2"))
 
     }
 

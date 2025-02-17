@@ -47,7 +47,13 @@ class Controller {
         if (entity != null) {
             println("${entity.id}번 명언이 등록되었습니다.")
         }
-
+    }
+    @handler("목록")
+    fun list(){
+        EntityManager.mutableMap.forEach{
+            key,value ->
+            println("${value.id} / ${value.author} / ${value.content}")
+        }
     }
 }
 
