@@ -124,6 +124,19 @@ class test {
 
 
     }
+    @Test
+    fun t9(){
+
+        val input = """
+            빌드
+            종료
+                """.trimIndent()
+        val str: String = TestUtil.run(input)
+        println(str)
+        assert(str.contains("data.json 파일의 내용이 갱신되었습니다."))
+
+    }
+
 
 
 }

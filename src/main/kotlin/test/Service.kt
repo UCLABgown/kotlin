@@ -18,4 +18,7 @@ object Service {
     fun gets():MutableMap<Int, Entity>{
         return Repository.gets()
     }
+    fun build(){
+        Repository.build()
+    }
 }

@@ -17,4 +17,7 @@ object Repository {
     fun gets():MutableMap<Int, Entity>{
         return EntityManager.mutableMap
     }
+    fun build(){
+        util.save(EntityManager.toString())
+    }
 }

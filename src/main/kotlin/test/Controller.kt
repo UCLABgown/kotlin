@@ -86,6 +86,11 @@ class Controller {
             Service.modify(id, content, author)
         }
     }
+    @handler("빌드")
+    fun build(){
+        Service.build()
+        println("data.json 파일의 내용이 갱신되었습니다.")
+    }
 
 }
 
