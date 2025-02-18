@@ -1,5 +1,6 @@
 package org.example.test
 
+import test.Query
 import java.util.*
 
 @Target(AnnotationTarget.FUNCTION)
@@ -28,16 +29,15 @@ class Controller {
     private fun repeat(){
         while (isThreadRun) {
             val input = input()
-            val id = util.split(input)
+            val query = util.split(input)
             Controller::class.members.find {
                 it.annotations.any { anno -> anno is handler && input.contains( anno.value) }
             }?.let{ m ->
                 if(m.parameters.size == 1)
                     m.call(this)
                 if(m.parameters.size == 2) {
-                    m.call(this, id)
+                    m.call(this,query)
                 }
-
             }
         }
     }
@@ -57,25 +57,32 @@ class Controller {
         }
     }
     @handler("목록")
-    fun list(){
-        Service.gets().forEach{
+    fun list(query: Query){
+        Service.gets()
+            .filter { (key,value) ->
+                value.author.contains(query.keyword.toString()) || !query.keywordType.equals("author")
+            }
+            .filter { (key,value) ->
+                value.content.contains(query.keyword.toString()) || !query.keywordType.equals("content")
+            }
+            .forEach{
             key,value ->
             println("${value.id} / ${value.author} / ${value.content}")
         }
     }
     @handler("삭제")
-    fun delete(id:Int){
-        val id_ = Service.delete(id)
+    fun delete(query: Query){
+        val id_ = query.id?.let { Service.delete(it) }
         if(id_ == -1)
-            println("${id}번 명언은 존재하지 않습니다.")
+            println("${query.id}번 명언은 존재하지 않습니다.")
         else
-            println("${id}번 명언 삭제")
+            println("${query.id}번 명언 삭제")
     }
     @handler("수정")
-    fun modify(id:Int){
-        val entity = Service.get(id)
+    fun modify(query: Query){
+        val entity = query.id?.let { Service.get(it) }
         if (entity == null)
-            println("${id}번 명언은 존재하지 않습니다.")
+            println("${query.id}번 명언은 존재하지 않습니다.")
         else{
             print("명언(기존) : ${entity.content}")
             print("명언: ")
@@ -83,7 +90,7 @@ class Controller {
             print("작가(기존) : ${entity.author}")
             print("작가: ")
             val author: String = sc.nextLine()
-            Service.modify(id, content, author)
+            Service.modify(query.id!!, content, author)
         }
     }
     @handler("빌드")

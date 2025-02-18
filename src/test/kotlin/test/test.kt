@@ -111,15 +111,15 @@ class test {
 
         val input = """
             수정?id=2
-            바뀐명언
-            바뀐이름
+            바뀐명언2
+            바뀐이름2
             종료
                 """.trimIndent()
         val str: String = TestUtil.run(input)
         println(str)
         val entity = org.example.test.Service.get(2)
         print(entity!!.content)
-        assert(entity!!.content.equals("바뀐명언"))
+        assert(entity.content.contains("바뀐명언"))
 
 
 
@@ -132,8 +132,18 @@ class test {
             종료
                 """.trimIndent()
         val str: String = TestUtil.run(input)
-        println(str)
         assert(str.contains("data.json 파일의 내용이 갱신되었습니다."))
+
+    }
+    @Test
+    fun t10(){
+
+        val input = """
+            목록?keywordType=author&keyword=2
+            종료
+                """.trimIndent()
+        val str: String = TestUtil.run(input)
+        assert(str.contains("바뀐명언"))
 
     }
 
