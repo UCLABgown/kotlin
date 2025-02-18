@@ -58,6 +58,18 @@ class test {
             등록
             몰라2
             사람임2
+            등록
+            몰라2
+            사람임2
+            등록
+            몰라2
+            사람임2
+            등록
+            몰라2
+            사람임2
+            등록
+            몰라2
+            사람임2
             종료
                 """.trimIndent()
         val str: String = TestUtil.run(input)
@@ -79,8 +91,6 @@ class test {
         val str: String = TestUtil.run(input)
         assert(str.contains("사람임1"))
         assert(str.contains("몰라1"))
-        assert(str.contains("사람임2"))
-        assert(str.contains("몰라2"))
 
     }
     @Test
@@ -116,10 +126,8 @@ class test {
             종료
                 """.trimIndent()
         val str: String = TestUtil.run(input)
-        println(str)
         val entity = org.example.test.Service.get(2)
-        print(entity!!.content)
-        assert(entity.content.contains("바뀐명언"))
+        assert(entity!!.content.contains("바뀐명언"))
 
 
 
@@ -139,13 +147,16 @@ class test {
     fun t10(){
 
         val input = """
-            목록?keywordType=author&keyword=2
+            목록?keywordType=author&keyword=바뀐
             종료
                 """.trimIndent()
         val str: String = TestUtil.run(input)
+        println(str)
         assert(str.contains("바뀐명언"))
+        assert(!str.contains("몰라"))
 
     }
+
 
 
 

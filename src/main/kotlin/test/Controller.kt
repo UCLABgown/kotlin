@@ -58,15 +58,9 @@ class Controller {
     }
     @handler("목록")
     fun list(query: Query){
-        Service.gets()
-            .filter { (key,value) ->
-                value.author.contains(query.keyword.toString()) || !query.keywordType.equals("author")
-            }
-            .filter { (key,value) ->
-                value.content.contains(query.keyword.toString()) || !query.keywordType.equals("content")
-            }
+        Service.gets(query)
             .forEach{
-            key,value ->
+            value ->
             println("${value.id} / ${value.author} / ${value.content}")
         }
     }
